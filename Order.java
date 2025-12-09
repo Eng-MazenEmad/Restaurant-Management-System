@@ -1,4 +1,4 @@
-package Order;
+
 
 import java.util.*;
 import java.io.*;
@@ -138,58 +138,6 @@ public class Order {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
-
-    //Mazen ______ customer id
-    public String findOrder(int targetCustomerId) {
-        File file = new File("Order.txt");
-
-        StringBuilder currentOrder = null;
-        StringBuilder lastMatchedOrder = null;
-        boolean recording = false;
-
-        try (Scanner sc = new Scanner(file)) {
-
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-
-                // بداية Order جديد
-                if (line.startsWith("OrderId is")) {
-                    recording = true;
-                    currentOrder = new StringBuilder();
-                    currentOrder.append(line).append("\n");
-                    continue;
-                }
-
-                // نهاية Order (الخط ده هنتجاهله علشان انتي مش عايزاه)
-                if (line.startsWith("********")) {
-                    recording = false;
-                    continue;
-                }
-
-                // لو بنسجل الأوردر
-                if (recording && currentOrder != null) {
-                    currentOrder.append(line).append("\n");
-                }
-
-                // Check CustomerId ونحفظ آخر واحد مطابق
-                if (line.startsWith("CustomerId is")) {
-                    int custId = Integer.parseInt(line.replace("CustomerId is", "").trim());
-                    if (custId == targetCustomerId) {
-                        lastMatchedOrder = new StringBuilder(currentOrder.toString());
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            return "Error reading file: " + e.getMessage();
-        }
-
-        if (lastMatchedOrder == null) {
-            return "No orders found for Customer ID = " + targetCustomerId;
-        }
-
-        return lastMatchedOrder.toString();
     }
 
     //Ahmed Ali
