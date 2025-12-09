@@ -107,8 +107,13 @@ public class Customer {
     
 // code for saving cust info in files
 //public void saveToFile() {
+//    if (!successful) {
+//        System.out.println("Customer data is invalid. Not saved.");
+//        return;
+//    }
+//
 //    try {
-//        FileWriter fw = new FileWriter("customers.txt", true); // true = append
+//        FileWriter fw = new FileWriter("customers.txt", true);
 //        fw.write("Customer ID: " + custID + "\n");
 //        fw.write("Name: " + custName + "\n");
 //        fw.write("Phone: " + phoneNum + "\n");
@@ -121,3 +126,4 @@ public class Customer {
 //        System.out.println("Error saving customer!");
 //    }
 //}
+
