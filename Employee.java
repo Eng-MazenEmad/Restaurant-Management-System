@@ -1,18 +1,18 @@
 //الكلاس الضارب المشطشط 🌶️🌶️🌶️🌶️
 import java.util.ArrayList;
+//public class Employee extends User
+public class Employee  {
 
-public class Employee extends User {
-
-    @Override
-    public int getRole() {
-        return 2;
-    }
+    // @Override
+    // public int getRole() {
+    //     return 2;
+    // }
 
     ArrayList<Customer> customers = new ArrayList<>();
 
-    public Employee(int userId, String username, String password, int role) {
-        super(userId, username, password, role);
-    }
+    // public Employee(int userId, String username, String password, int role) {
+    //     super(userId, username, password, role);
+    // }
 
 
     public boolean addCustomer(Customer customer) {
