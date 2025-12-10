@@ -1,6 +1,9 @@
 package Customer;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Customer {
 
@@ -9,35 +12,42 @@ public class Customer {
     private String phoneNum;
     private String address;
     private int loyaltyPoints;
-    private double totalSpent;
-
-    private boolean successful;        // true only if created correctly
-    private static int idCounter = 0;
+    private boolean successful;
+    private static int idCounter ;
 
     // ---------- Constructor ----------
+    static {
+        loadLastIdFromFile();
+    }
+    
     public Customer(String custName, String phoneNum, String address) {
+        successful = true; // assume valid initially
 
-        successful = true;
+        // Trim inputs
+        String trimmedName = custName.trim();
+        String trimmedPhone = phoneNum.trim();
+        String trimmedAddress = address.trim();
 
-        // Name validation (letters and spaces only)
-        if (custName.matches("[a-zA-Z ]+")) {
-            this.custName = custName;
+        // Validate name
+        if (trimmedName.matches("[a-zA-Z ]+")) {
+            this.custName = trimmedName;
         } else {
             System.out.println("Invalid customer name!");
             successful = false;
         }
 
-        // Phone validation (exactly 11 digits)
-        if (phoneNum.matches("\\d{11}")) {
-            this.phoneNum = phoneNum;
+        // Validate phone number
+        if (trimmedPhone.matches("\\d{11}")) {
+            this.phoneNum = trimmedPhone;
         } else {
             System.out.println("Invalid phone number!");
             successful = false;
         }
 
-        this.address = address;
+        // Assign address
+        this.address = trimmedAddress;
 
-        // Assign ID only if data is valid
+        // Assign ID only if creation was successful
         if (successful) {
             idCounter++;
             custID = idCounter;
@@ -86,10 +96,6 @@ public class Customer {
         return loyaltyPoints;
     }
 
-    public double getTotalSpent() {
-        return totalSpent;
-    }
-
     public boolean isSuccessful() {
         return successful;
     }
@@ -97,37 +103,63 @@ public class Customer {
     // ---------- Display ----------
     public void viewProfile() {
         System.out.println(
-                "Customer ID: " + custID +
-                "\nName: " + custName +
-                "\nPhone Number: " + phoneNum +
-                "\nAddress: " + address +
-                "\nLoyalty Points: " + loyaltyPoints +
-                "\nTotal Spent: " + totalSpent
+            "Customer ID: " + custID +
+            "\nName: " + custName +
+            "\nPhone Number: " + phoneNum +
+            "\nAddress: " + address +
+            "\nLoyalty Points: " + loyaltyPoints
         );
     }
+         // ---------- LOAD LAST ID ----------
+    private static void loadLastIdFromFile() {
+        File file = new File("customers.txt");
 
-    // ---------- Save to File ----------
+        if (!file.exists()) {
+            idCounter = 0;
+            return;
+        }
+
+        try (Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (line.startsWith("Customer ID:")) {
+                    int id = Integer.parseInt(
+                        line.replace("Customer ID:", "").trim()
+                    );
+                    if (id > idCounter) {
+                        idCounter = id;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+     // ---------- Save to File ----------
     public void saveToFile() {
-
         if (!successful) {
             System.out.println("Customer data is invalid. Not saved.");
             return;
         }
 
-        try {
-            FileWriter fw = new FileWriter("customers.txt", true);
-
+        try (FileWriter fw = new FileWriter("customers.txt", true)) {
             fw.write("Customer ID: " + custID + "\n");
             fw.write("Name: " + custName + "\n");
             fw.write("Phone: " + phoneNum + "\n");
             fw.write("Address: " + address + "\n");
             fw.write("Loyalty Points: " + loyaltyPoints + "\n");
-            fw.write("Total Spent: " + totalSpent + "\n");
             fw.write("---------------------------\n");
-
-            fw.close();
         } catch (Exception e) {
             System.out.println("Error saving customer!");
         }
     }
+//    clear all customers
+    public static void clearCustomersFile() {
+    try (FileWriter fw = new FileWriter("customers.txt", false)) {
+        idCounter = 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }
