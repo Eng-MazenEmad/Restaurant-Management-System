@@ -40,7 +40,7 @@ public class MealManager {
     public static void writeMeals(List<Meal> meals) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
             for (Meal meal : meals) {
-                bw.write(meal.toFileString());
+                bw.write(meal.toString());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -120,3 +120,4 @@ public class MealManager {
     }
 
 }
+
