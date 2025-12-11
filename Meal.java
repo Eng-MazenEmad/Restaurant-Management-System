@@ -1,4 +1,4 @@
-package Meal;
+
 public class Meal {
     private int MealId;
     private String name;

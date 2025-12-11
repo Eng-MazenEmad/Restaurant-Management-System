@@ -1,19 +1,11 @@
 //الكلاس الضارب المشطشط 🌶️🌶️🌶️🌶️
 import java.util.ArrayList;
-//public class Employee extends User
 public class Employee  {
 
-    // @Override
-    // public int getRole() {
-    //     return 2;
-    // }
-
+ 
     ArrayList<Customer> customers = new ArrayList<>();
 
-    // public Employee(int userId, String username, String password, int role) {
-    //     super(userId, username, password, role);
-    // }
-
+   
 
     public boolean addCustomer(Customer customer) {
         for (Customer cust : customers) {
@@ -29,7 +21,7 @@ public class Employee  {
 
     public boolean deleteCustomer(int id) {
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getCustID() == id) {//Type
+            if (customers.get(i).getCustID() == id) {
                 customers.remove(i);
                 return true;
             }

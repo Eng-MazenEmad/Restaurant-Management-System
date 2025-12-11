@@ -1,4 +1,3 @@
-package Meal;
 import java.io.*;
 import java.util.*;
 
