@@ -1,0 +1,2 @@
+Customer: 4, Reward: l3ba
+Customer: 2, Reward: 3rosa

@@ -1,0 +1,2 @@
+Customer ID: 2, Offer: el3ela, Discount: 10%
+Customer ID: 4, Offer: el3ela, Discount: 15%
