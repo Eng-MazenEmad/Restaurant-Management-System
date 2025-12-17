@@ -1,0 +1,304 @@
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2339.28
+Total After Tax: $2666.78
+Method: VISA
+Time: 2025-12-11T22:37:28.451244700
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: CASH
+Time: 2025-12-11T22:38:12.541695500
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: CASH
+Time: 2025-12-11T22:40:36.892266
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: CASH
+Time: 2025-12-11T22:40:53.659913
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: CASH
+Time: 2025-12-11T22:41:48.437046300
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: CASH
+Time: 2025-12-11T22:43:20.740035400
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T22:44:09.068630900
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: CASH
+Time: 2025-12-11T22:45:15.900378400
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T22:47:03.396792500
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: VISA
+Time: 2025-12-11T22:50:04.237499400
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: VISA
+Time: 2025-12-11T22:51:35.029265900
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T22:52:44.011228900
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $2052.00
+Total After Tax: $2339.28
+Method: VISA
+Time: 2025-12-11T22:55:56.940417600
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T22:59:25.429511200
+----------------------------------------
+
+OrderID: 666
+CustomerID: 555
+SubTotal: $1250.00
+Total After Tax: $1425.00
+Method: VISA
+Time: 2025-12-11T23:06:27.846373300
+----------------------------------------
+
+OrderID: 666
+CustomerID: 555
+SubTotal: $1250.00
+Total After Tax: $1425.00
+Method: VISA
+Time: 2025-12-11T23:12:39.141644300
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T23:20:17.279027900
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: CASH
+Time: 2025-12-11T23:27:41.735249200
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-11T23:32:13.256121500
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-12T10:15:00.994351500
+----------------------------------------
+
+OrderID: 1111
+CustomerID: 1111
+SubTotal: $1800.00
+Total After Tax: $2052.00
+Method: VISA
+Time: 2025-12-12T10:50:58.567379400
+----------------------------------------
+
+OrderID: 324
+CustomerID: 24
+SubTotal: $750.00
+Total After Tax: $855.00
+Method: CASH
+Time: 2025-12-12T12:33:16.570240400
+----------------------------------------
+
+OrderID: 124
+CustomerID: 51
+SubTotal: $450.00
+Total After Tax: $513.00
+Method: VISA
+Time: 2025-12-12T13:12:21.238806200
+----------------------------------------
+
+OrderID: 2
+CustomerID: 4
+SubTotal: $300.00
+Total After Tax: $342.00
+Method: VISA
+Time: 2025-12-12T18:59:36.791407
+----------------------------------------
+
+OrderID: 111
+CustomerID: 111
+SubTotal: $-2.00
+Total After Tax: $-2.28
+Method: CASH
+Time: 2025-12-12T19:00:34.619559700
+----------------------------------------
+
+OrderID: 124
+CustomerID: 51
+SubTotal: $450.00
+Total After Tax: $513.00
+Method: VISA
+Time: 2025-12-12T19:01:40.221445900
+----------------------------------------
+
+OrderID: 146
+CustomerID: 634
+SubTotal: $-2.00
+Total After Tax: $-2.28
+Method: CASH
+Time: 2025-12-12T19:09:30.250407600
+----------------------------------------
+
+OrderID: 35
+CustomerID: 643
+SubTotal: $-3.00
+Total After Tax: $-3.42
+Method: CASH
+Time: 2025-12-12T19:10:34.746046100
+----------------------------------------
+
+OrderID: 67
+CustomerID: 90
+SubTotal: $-2.00
+Total After Tax: $-2.28
+Method: VISA
+Time: 2025-12-12T19:17:30.606349200
+----------------------------------------
+
+OrderID: 12
+CustomerID: 45
+SubTotal: $-2.00
+Total After Tax: $-2.28
+Method: CASH
+Time: 2025-12-12T19:18:59.627605700
+----------------------------------------
+
+OrderID: 666
+CustomerID: 555
+SubTotal: $1250.00
+Total After Tax: $1425.00
+Method: CASH
+Time: 2025-12-12T19:29:17.245836100
+----------------------------------------
+
+OrderID: 64
+CustomerID: 7
+SubTotal: $-2.00
+Total After Tax: $-2.28
+Method: CASH
+Time: 2025-12-12T20:08:10.983965600
+----------------------------------------
+
+OrderID: 123
+CustomerID: 25
+SubTotal: $-1.00
+Total After Tax: $-1.14
+Method: CASH
+Time: 2025-12-12T21:00:42.103251700
+----------------------------------------
+
+OrderID: 31
+CustomerID: 462
+SubTotal: $-3.00
+Total After Tax: $-3.42
+Method: CASH
+Time: 2025-12-12T21:03:47.520994200
+----------------------------------------
+
+OrderID: 12
+CustomerID: 43
+SubTotal: $300.00
+Total After Tax: $342.00
+Method: CASH
+Time: 2025-12-12T22:20:20.777945600
+----------------------------------------
+
+OrderID: 3
+CustomerID: 6
+SubTotal: $700.00
+Total After Tax: $798.00
+Method: CASH
+Time: 2025-12-13T06:26:34.551146200
+----------------------------------------
+
+OrderID: 24
+CustomerID: 24
+SubTotal: $1600.00
+Total After Tax: $1824.00
+Method: CASH
+Time: 2025-12-13T20:38:37.415936800
+----------------------------------------
+
+OrderID: 4523
+CustomerID: 9732
+SubTotal: $2000.00
+Total After Tax: $2280.00
+Method: CASH
+Time: 2025-12-13T20:43:06.457227700
+----------------------------------------
+
