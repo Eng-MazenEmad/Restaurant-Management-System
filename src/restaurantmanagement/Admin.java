@@ -150,6 +150,23 @@ abstract class User {
 //            ex.printStackTrace();
         }
     }
+     public boolean employeeExists(int id) {
+         ArrayList<String> employees = readEmployees();
+         for (String emp : employees) {
+             String[] parts = emp.split(",");
+             if (parts.length > 0) {
+                 try {
+                     int existingId = Integer.parseInt(parts[0]);
+                     if (existingId == id) {
+                         return true; // ID found
+                     }
+                 } catch (NumberFormatException e) {
+
+                 }
+             }
+         }
+         return false;
+     }
 
     //delete employee
     public boolean deleteEmployee(int id) {
@@ -653,3 +670,4 @@ static class Meal {
 //      
 //    }
 }
+ 

@@ -254,21 +254,24 @@ private void loadTableData() {
 //         x =new OrderDetails(name,Qusntity);
 //         y.makeOrder(x);
 //         fName.setText("");
-//         fQuantity.setText("");  
- String name = fName.getText();
-    String qtyText = fQuantity.getText();
+//         fQuantity.setText(""); 
+        try {
+                    String name = fName.getText();
+                    String qtyText = fQuantity.getText();
 
-    if (name.isEmpty() || qtyText.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please, enter all Meal Details");
-    }
-    else{
-    int Quantity =Integer.parseInt(qtyText);
-//    x = new OrderDetails(name, Quantity);
-//    y.makeOrder(x);
-//    fName.setText("");
-//    fQuantity.setText("");
-      addMealIfExists(name, Quantity);
-    }
+                    if (name.isEmpty() || qtyText.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Please, enter all Meal Details");
+                    } else {
+                        int Quantity = Integer.parseInt(qtyText);
+                        x = new OrderDetails(name, Quantity);
+                        y.makeOrder(x);
+                        fName.setText("");
+                        fQuantity.setText("");
+                        addMealIfExists(name, Quantity);
+                    }
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
+                }
     }//GEN-LAST:event_btnSaveItemActionPerformed
 
     private void fQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fQuantityActionPerformed
@@ -295,12 +298,10 @@ private void loadTableData() {
        try {
         // Get the current order ID from the text field
         String orderIdText = fMakeId.getText().trim();
-        if (orderIdText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, 
-                "Please enter an Order ID first.", 
-                "No Order ID", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+//        if(!orderIdText.matches("^[a-zA-Z][a-zA-Z]*$"))
+        if(!orderIdText.matches("^[0-9]+$")){
+                throw new IllegalArgumentException("Order must be contain only letters");
+            }
         
         final String orderId = orderIdText; // Keep as String for text field
         
@@ -317,11 +318,9 @@ private void loadTableData() {
         });
         //CLOSE THE CURRENT WINDOW
         this.dispose();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, 
-            "Error: " + e.getMessage(), 
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
+    } catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(this,ex.getMessage(),"Input Error",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBilleActionPerformed
 
     private void btnCancleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancleActionPerformed

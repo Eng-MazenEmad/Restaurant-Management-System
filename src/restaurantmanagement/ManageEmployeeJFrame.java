@@ -4,11 +4,9 @@ import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
 public class ManageEmployeeJFrame extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManageEmployeeJFrame.class.getName());
-
 
     public ManageEmployeeJFrame() {
         initComponents();
@@ -201,13 +199,14 @@ public class ManageEmployeeJFrame extends javax.swing.JFrame {
             String name = txtName.getText();
             String pass = txtPass.getText();
 
-            if (name.isEmpty() || pass.isEmpty() || (id + "").isEmpty() || name.matches(".*\\d.*")) {
+            if (name.isEmpty() || pass.isEmpty() || (id + "").isEmpty() || name.matches(".\\d.")) {
                 JOptionPane.showMessageDialog(this, "Please, fill all fields and enter valied information", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (admin.employeeExists(id)) {
+                JOptionPane.showMessageDialog(this, "Employee ID already exists! Please use a different ID.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 admin.addEmployee(id, name, pass);
                 JOptionPane.showMessageDialog(this, "Employee added successfully");
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error" + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -217,15 +216,20 @@ public class ManageEmployeeJFrame extends javax.swing.JFrame {
     // Search employee
     private void Btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4ActionPerformed
         try {
-            int id = Integer.parseInt(txtID.getText());
-            if ((id + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please enter emloyee ID", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                String returnedEmp = admin.searchEmployee(id);
-                JOptionPane.showMessageDialog(this, returnedEmp);
+            String sid = txtID.getText();
+            if (!sid.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            String returnedEmp = admin.searchEmployee(Integer.parseInt(txtID.getText()));
+            if (returnedEmp != null) {
+                JOptionPane.showMessageDialog(this, returnedEmp);
+            } else {
+                JOptionPane.showMessageDialog(this, "ID not found");
+            }
+
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_Btn4ActionPerformed

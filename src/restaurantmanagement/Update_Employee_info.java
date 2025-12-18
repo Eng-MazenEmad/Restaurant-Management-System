@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class Update_Employee_info extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Update_Employee_info.class.getName());
 
     /**
@@ -134,25 +134,27 @@ public class Update_Employee_info extends javax.swing.JFrame {
 //         else{
 //             updateEmployee(id,name,passWord);
 //         }
- try{
-        int id=Integer.parseInt(fid.getText());
-        if ((id + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please, enter employee ID");
+        try {
+            String sid = fid.getText();
+//            int id = Integer.parseInt(txtID.getText());
+            if (!sid.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
             }
-       String name=fName.getText(); 
-       String passWord=fpass.getText();
-         if ((passWord + "").isEmpty()||(name + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please, enter employee new data");
+            String name = fName.getText();
+            if (!name.matches("^[a-zA-Z][a-zA-Z]*$")) {
+                throw new IllegalArgumentException("Name must be contain only letters");
             }
-         else{
-             updateEmployee(id,name,passWord);
-         }
-       }catch (HeadlessException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            String passWord = fpass.getText();
+            if ((passWord + "").isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please, Enter Password");
+            } else {
+                updateEmployee(Integer.parseInt(sid), name, passWord);
+            }
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
-        
-       
-       
+
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
@@ -191,69 +193,71 @@ public class Update_Employee_info extends javax.swing.JFrame {
     private javax.swing.JLabel passlable;
     // End of variables declaration//GEN-END:variables
 public void updateEmployee(int id, String newName, String newPass) {
-    String fileName = "employee.txt";
-    File file = new File(fileName);
+        String fileName = "employee.txt";
+        File file = new File(fileName);
 
-    if (!file.exists()) {
-        JOptionPane.showMessageDialog(this,
-                "file not found",
-                "File Error",
-                JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    try {
-        // خطوة 1: نقرأ كل الفايل
-        Scanner sc = new Scanner(file);
-        StringBuilder newContent = new StringBuilder();
-        boolean found = false;
-
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine().trim();
-            if (line.isEmpty()) continue;
-
-            String[] parts = line.split(",");
-
-            int currentId = Integer.parseInt(parts[0].trim());
-
-            if (currentId == id) {
-                // لقيناه → نعدّل السطر
-                String updatedLine = id + "," + newName + "," + newPass;
-                newContent.append(updatedLine).append("\n");
-                found = true;
-            } else {
-                // سطر عادي → نرجعه زي ما هو
-                newContent.append(line).append("\n");
-            }
-        }
-        sc.close();
-
-        // خطوة 2: لو ملقيناهش
-        if (!found) {
+        if (!file.exists()) {
             JOptionPane.showMessageDialog(this,
-                    "ID not foud",
-                    "Error",
+                    "file not found",
+                    "File Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // خطوة 3: نكتب الفايل من الأول
-        java.io.FileWriter writer = new java.io.FileWriter(file);
-        writer.write(newContent.toString());
-        writer.close();
+        try {
+            // خطوة 1: نقرأ كل الفايل
+            Scanner sc = new Scanner(file);
+            StringBuilder newContent = new StringBuilder();
+            boolean found = false;
 
-        // خطوة 4: رسالة نجاح
-        JOptionPane.showMessageDialog(this,
-                "Done Successfully",
-                "Success",
-                JOptionPane.INFORMATION_MESSAGE);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+                if (line.isEmpty()) {
+                    continue;
+                }
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-                "Error During read file",
-                "File Error",
-                JOptionPane.ERROR_MESSAGE);
+                String[] parts = line.split(",");
+
+                int currentId = Integer.parseInt(parts[0].trim());
+
+                if (currentId == id) {
+                    // لقيناه → نعدّل السطر
+                    String updatedLine = id + "," + newName + "," + newPass;
+                    newContent.append(updatedLine).append("\n");
+                    found = true;
+                } else {
+                    // سطر عادي → نرجعه زي ما هو
+                    newContent.append(line).append("\n");
+                }
+            }
+            sc.close();
+
+            // خطوة 2: لو ملقيناهش
+            if (!found) {
+                JOptionPane.showMessageDialog(this,
+                        "ID not foud",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // خطوة 3: نكتب الفايل من الأول
+            java.io.FileWriter writer = new java.io.FileWriter(file);
+            writer.write(newContent.toString());
+            writer.close();
+
+            // خطوة 4: رسالة نجاح
+            JOptionPane.showMessageDialog(this,
+                    "Done Successfully",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error During read file",
+                    "File Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
 
 }

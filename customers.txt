@@ -1,63 +1,23 @@
 Customer ID: 1
-Name: asmaa
+Name: cust
 Phone: 01120080746
-Address: aaaaaaaaaaaaaaaa
+Address: custaddress
 Loyalty Points: 170
 Registered: true
 ---------------------------
+
+
 Customer ID: 2
-Name: Ali
+Name: ail
 Phone: 01120080746
-Address: ddddddddd
+Address: wwww
 Loyalty Points: 0
 Registered: true
 ---------------------------
 Customer ID: 3
-Name: ahmed
+Name: asmaa
 Phone: 01120080746
-Address: hjgkaschjjl
-Loyalty Points: 80
-Registered: false
----------------------------
-Customer ID: 4
-Name: ahmede
-Phone: 01120080746
-Address: ksdghaks
-Loyalty Points: 30
-Registered: false
----------------------------
-Customer ID: 5
-Name: ahmedeg
-Phone: 01120080746
-Address: ksdghaks
-Loyalty Points: 0
-Registered: true
----------------------------
-Customer ID: 6
-Name: ldlsdkj
-Phone: 01120080746
-Address: mndfdsn;
-Loyalty Points: 70
-Registered: true
----------------------------
-Customer ID: 7
-Name: djksdjk
-Phone: 01120080746
-Address: kldafj;aklsd
-Loyalty Points: 0
-Registered: true
----------------------------
-Customer ID: 8
-Name: hduihiuh
-Phone: 01120080746
-Address: dyjfuo
-Loyalty Points: 130
-Registered: true
----------------------------
-Customer ID: 9
-Name: jkah
-Phone: 01120080746
-Address: lnzljv
+Address: ooooo
 Loyalty Points: 0
 Registered: true
 ---------------------------

@@ -41,6 +41,8 @@ public class Admin_login extends javax.swing.JFrame {
         Namelable = new javax.swing.JLabel();
         fName = new javax.swing.JTextField();
         BtnSubmit = new javax.swing.JButton();
+        pass_field = new javax.swing.JPasswordField();
+        Namelable1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,11 @@ public class Admin_login extends javax.swing.JFrame {
         BtnSubmit.setText("Submit");
         BtnSubmit.addActionListener(this::BtnSubmitActionPerformed);
 
+        Namelable1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Namelable1.setForeground(new java.awt.Color(0, 153, 204));
+        Namelable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Namelable1.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,14 +85,17 @@ public class Admin_login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Namelable1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(idlable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(fid, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(Namelable, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fName)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(BtnSubmit)))
+                            .addComponent(fName)
+                            .addComponent(pass_field))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BtnSubmit)
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,8 +111,12 @@ public class Admin_login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+                .addComponent(Namelable1)
+                .addGap(12, 12, 12)
+                .addComponent(pass_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnSubmit)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,17 +131,22 @@ public class Admin_login extends javax.swing.JFrame {
     }//GEN-LAST:event_fidActionPerformed
 
     private void BtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSubmitActionPerformed
-         String sid = fid.getText();
-        String name=fName.getText();
-        if ((name + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please, enter Admin name");
+        try {
+            String sid = fid.getText();
+            String name = fName.getText();
+            String pass=new String(pass_field.getPassword());
+            if (!sid.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
             }
-          if(!sid.matches("\\d+")){
-              JOptionPane.showMessageDialog(this, "ID must be contain only numbers");
-        }
-        else{
-        int id=Integer.parseInt(sid); 
-            goToPageIfFound(id);}       
+            if (!name.matches("^[a-zA-Z][a-zA-Z0-9]*$")) {
+                throw new IllegalArgumentException("Username must be contain only letters and numbers");
+            }
+            goToPageIfFound(Integer.parseInt(sid),name,pass);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        }   
+        
+        
     }//GEN-LAST:event_BtnSubmitActionPerformed
 
     /**
@@ -140,12 +159,14 @@ public class Admin_login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSubmit;
     private javax.swing.JLabel Namelable;
+    private javax.swing.JLabel Namelable1;
     private javax.swing.JTextField fName;
     private javax.swing.JTextField fid;
     private javax.swing.JLabel idlable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField pass_field;
     // End of variables declaration//GEN-END:variables
-public void goToPageIfFound(int id) {
+public void goToPageIfFound(int id, String name,String pass) {
     String fileName = "admin.txt";
 
     try (Scanner sc = new Scanner(new File(fileName))) {
@@ -156,7 +177,7 @@ public void goToPageIfFound(int id) {
             if (parts.length > 0) {
                 int currentId = Integer.parseInt(parts[0].trim());
 
-                if (currentId == id) {
+                if (currentId == id&&parts[1].equals(name)&&parts[2].equals(pass)) {
                     this.dispose();
                     java.awt.EventQueue.invokeLater(() -> {
             AdminDashboard x = new AdminDashboard();

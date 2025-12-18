@@ -41,6 +41,8 @@ public class Employee_login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         fName = new javax.swing.JTextField();
         BtnSubmit = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        pass_field = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,11 @@ public class Employee_login extends javax.swing.JFrame {
         BtnSubmit.setText("Submit");
         BtnSubmit.addActionListener(this::BtnSubmitActionPerformed);
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,14 +84,24 @@ public class Employee_login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fid, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(BtnSubmit)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(102, 102, 102)
+                                .addComponent(BtnSubmit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(pass_field, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 76, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,9 +116,13 @@ public class Employee_login extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pass_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(BtnSubmit)
-                .addGap(25, 25, 25))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,21 +137,22 @@ public class Employee_login extends javax.swing.JFrame {
     }//GEN-LAST:event_fNameActionPerformed
 
     private void BtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSubmitActionPerformed
+        try {
             String sid = fid.getText();
-//        if ((sid + "").isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Please, enter employee ID");
-//            }
-       
-        String name=fName.getText();
-        if ((name + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please, enter employee name");
+            String name = fName.getText();
+            String pass=new String(pass_field.getPassword());
+            if (!name.matches("^[a-zA-Z][a-zA-Z0-9]*$")) {
+                throw new IllegalArgumentException("Username must be contain only letters and numbers");
             }
-          if(!sid.matches("\\d+")){
-              JOptionPane.showMessageDialog(this, "ID must be contain only numbers");
-        }
-        else{
-        int id=Integer.parseInt(sid);   
-        goToPageIfFound(id);}  
+            if (!sid.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
+            }
+
+            int id = Integer.parseInt(sid);
+            goToPageIfFound(id,name,pass);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        }     
     }//GEN-LAST:event_BtnSubmitActionPerformed
 
     /**
@@ -148,8 +170,10 @@ public class Employee_login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField pass_field;
     // End of variables declaration//GEN-END:variables
-public void goToPageIfFound(int id) {
+public void goToPageIfFound(int id, String name, String pass) {
     String fileName = "employee.txt";
 
     try (Scanner sc = new Scanner(new File(fileName))) {
@@ -160,7 +184,7 @@ public void goToPageIfFound(int id) {
             if (parts.length > 0) {
                 int currentId = Integer.parseInt(parts[0].trim());
 
-                if (currentId == id) {
+                if (currentId == id&&parts[1].equals(name)&&parts[2].equals(pass)) {
                     this.dispose();
                     java.awt.EventQueue.invokeLater(() -> {
            Employee_App x = new Employee_App();
