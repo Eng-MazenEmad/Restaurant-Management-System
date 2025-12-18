@@ -16,7 +16,6 @@ public class Customer {
     private boolean successful;
     private boolean registered; // loyalty program registration
     private static int idCounter;
-    
 
     // Runs once when program starts to load last ID 
     static {
@@ -33,14 +32,14 @@ public class Customer {
         if (trimmedName.matches("[a-zA-Z ]+")) {
             this.custName = trimmedName;
         } else {
-            System.out.println("Invalid customer name!");
+            
             successful = false;
         }
 
         if (trimmedPhone.matches("\\d{11}")) {
             this.phoneNum = trimmedPhone;
         } else {
-            System.out.println("Invalid phone number!");
+
             successful = false;
         }
 
@@ -81,6 +80,7 @@ public class Customer {
 
     public void setLoyaltyPoints(int loyaltyPoints) {
         this.loyaltyPoints = loyaltyPoints;
+        saveUpdatedPointsToFile();
     }
 
     // ---------- Registered getter/setter ----------
@@ -505,4 +505,78 @@ public class Customer {
             e.printStackTrace();
         }
     }
+
+    public static String getRewardsByCustomerId(int customerId) {
+        String rewards = "";
+        boolean targetCustomer = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("rewards_given.txt"))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                // Check for Customer ID line
+                if (line.startsWith("Customer ID:")) {
+                    int id = Integer.parseInt(line.replace("Customer ID:", "").trim());
+                    targetCustomer = (id == customerId);
+                    continue;
+                }
+
+                // If inside the target customer block, get the reward
+                if (targetCustomer && line.startsWith("Reward:")) {
+                    String reward = line.replace("Reward:", "").trim();
+                    rewards += "- " + reward + "\n";
+                }
+
+                // End of block
+                if (line.startsWith("----------------")) {
+                    targetCustomer = false;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error reading rewards file");
+            e.printStackTrace();
+        }
+
+        return rewards.isEmpty() ? "No rewards yet." : rewards;
+    }
+
+    // Add points to the customer and save to file
+// Save updated points to file  
+    private void saveUpdatedPointsToFile() {
+    File original = new File("customers.txt");
+    File temp = new File("customers_temp.txt");
+
+    try (BufferedReader br = new BufferedReader(new FileReader(original));
+         FileWriter fw = new FileWriter(temp)) {
+
+        String line;
+        boolean targetBlock = false;
+
+        while ((line = br.readLine()) != null) {
+
+            if (line.startsWith("Customer ID:")) {
+                int id = Integer.parseInt(line.replace("Customer ID:", "").trim());
+                targetBlock = (id == this.custID);
+            }
+
+            if (targetBlock && line.startsWith("Loyalty Points:")) {
+                line = "Loyalty Points: " + this.loyaltyPoints;
+                targetBlock = false;
+            }
+
+            fw.write(line + "\n");
+        }
+
+    } catch (Exception e) {
+        // silent, do nothing
+    }
+
+    // Replace original file, no console messages
+    original.delete();
+    temp.renameTo(original);
+}
+
+
 }

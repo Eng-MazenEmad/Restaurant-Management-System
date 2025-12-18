@@ -31,6 +31,7 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     
     // Initialize labels as hidden
+    reward_area.setVisible(false);
     ID_label.setVisible(false);
     name_label.setVisible(false);
     phone_label.setVisible(false);
@@ -69,6 +70,8 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
         totalSpent_label = new javax.swing.JLabel();
         points_label = new javax.swing.JLabel();
         orders_label = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        reward_area = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +81,7 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
 
         Rew_btn.setText("Rewards");
         Rew_btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Rew_btn.addActionListener(this::Rew_btnActionPerformed);
 
         ID_label.setText("ID:");
 
@@ -93,13 +97,20 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
 
         orders_label.setText("Total Orders:");
 
+        reward_area.setBackground(new java.awt.Color(242, 242, 242));
+        reward_area.setColumns(20);
+        reward_area.setRows(5);
+        jScrollPane1.setViewportView(reward_area);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Rew_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Rew_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +118,7 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
                                 .addComponent(ID_label, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(name_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(phone_label, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                            .addComponent(phone_label, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
                         .addContainerGap())
                     .addComponent(address_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(totalSpent_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -121,21 +132,26 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prf_btn)
                     .addComponent(Rew_btn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ID_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(name_label)
-                .addGap(18, 18, 18)
-                .addComponent(phone_label)
-                .addGap(18, 18, 18)
-                .addComponent(address_label)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(ID_label)
+                        .addGap(18, 18, 18)
+                        .addComponent(name_label)
+                        .addGap(18, 18, 18)
+                        .addComponent(phone_label)
+                        .addGap(20, 20, 20)
+                        .addComponent(address_label))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(totalSpent_label)
                 .addGap(18, 18, 18)
                 .addComponent(points_label)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(orders_label)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,8 +184,23 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
         totalSpent_label.setVisible(true);
         points_label.setVisible(true);
         orders_label.setVisible(true);
+        reward_area.setVisible(false);
     
     }//GEN-LAST:event_prf_btnActionPerformed
+
+    private void Rew_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rew_btnActionPerformed
+        ID_label.setVisible(false);
+        name_label.setVisible(false);
+        phone_label.setVisible(false);
+        address_label.setVisible(false);
+        totalSpent_label.setVisible(false);
+        points_label.setVisible(false);
+        orders_label.setVisible(false);
+        reward_area.setVisible(true);
+        String rewards = Customer.getRewardsByCustomerId(currentCustomer.getCustID());
+        reward_area.setText(rewards);
+        
+    }//GEN-LAST:event_Rew_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,11 +214,13 @@ public class LoyaltyAppGUI extends javax.swing.JFrame {
     private javax.swing.JLabel ID_label;
     private javax.swing.JButton Rew_btn;
     private javax.swing.JLabel address_label;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name_label;
     private javax.swing.JLabel orders_label;
     private javax.swing.JLabel phone_label;
     private javax.swing.JLabel points_label;
     private javax.swing.JButton prf_btn;
+    private javax.swing.JTextArea reward_area;
     private javax.swing.JLabel totalSpent_label;
     // End of variables declaration//GEN-END:variables
 }
