@@ -631,7 +631,7 @@ static class Meal {
         System.out.println("Reward for customer" + customerId + ": " + reward);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("rewards_given.txt", true))) {
-            String record = "Customer " + customerId + " got reward: " + reward;
+            String record = "Customer: " + customerId + ", Reward: " + reward;
             bw.write(record);
             bw.newLine();
         } catch (IOException e) {

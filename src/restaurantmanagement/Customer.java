@@ -506,41 +506,74 @@ public class Customer {
         }
     }
 
+//    public static String getRewardsByCustomerId(int customerId) {
+//        String rewards = "";
+//        boolean targetCustomer = false;
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader("rewards_given.txt"))) {
+//            String line;
+//
+//            while ((line = br.readLine()) != null) {
+//
+//                // Check for Customer ID line
+//                if (line.startsWith("Customer:")) {
+//                    int id = Integer.parseInt(line.replace("Customer:", "").trim());
+//                    targetCustomer = (id == customerId);
+//                    continue;
+//                }
+//
+//                // If inside the target customer block, get the reward
+//                if (targetCustomer && line.startsWith("Reward:")) {
+//                    String reward = line.replace("Reward:", "").trim();
+//                    rewards += "- " + reward + "\n";
+//                }
+//
+//                // End of block
+//                if (line.startsWith("----------------")) {
+//                    targetCustomer = false;
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("Error reading rewards file");
+//            e.printStackTrace();
+//        }
+//
+//        return rewards.isEmpty() ? "No rewards yet." : rewards;
+//    }
     public static String getRewardsByCustomerId(int customerId) {
-        String rewards = "";
-        boolean targetCustomer = false;
+    String rewards = "";
 
-        try (BufferedReader br = new BufferedReader(new FileReader("rewards_given.txt"))) {
-            String line;
+    try (BufferedReader br = new BufferedReader(new FileReader("rewards_given.txt"))) {
+        String line;
 
-            while ((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
 
-                // Check for Customer ID line
-                if (line.startsWith("Customer ID:")) {
-                    int id = Integer.parseInt(line.replace("Customer ID:", "").trim());
-                    targetCustomer = (id == customerId);
-                    continue;
-                }
+            // Customer: 4, Reward: l3ba
+            if (line.startsWith("Customer:")) {
+                String[] parts = line.split(",");
 
-                // If inside the target customer block, get the reward
-                if (targetCustomer && line.startsWith("Reward:")) {
-                    String reward = line.replace("Reward:", "").trim();
+                int id = Integer.parseInt(
+                        parts[0].replace("Customer:", "").trim()
+                );
+
+                if (id == customerId) {
+                    String reward = parts[1]
+                            .replace("Reward:", "")
+                            .trim();
+
                     rewards += "- " + reward + "\n";
                 }
-
-                // End of block
-                if (line.startsWith("----------------")) {
-                    targetCustomer = false;
-                }
             }
-
-        } catch (Exception e) {
-            System.out.println("Error reading rewards file");
-            e.printStackTrace();
         }
 
-        return rewards.isEmpty() ? "No rewards yet." : rewards;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return rewards.isEmpty() ? "No rewards yet." : rewards;
+}
+
 
     // Add points to the customer and save to file
 // Save updated points to file  
