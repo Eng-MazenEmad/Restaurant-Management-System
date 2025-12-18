@@ -263,6 +263,12 @@ private void loadTableData() {
                         JOptionPane.showMessageDialog(this, "Please, enter all Meal Details");
                     } else {
                         int Quantity = Integer.parseInt(qtyText);
+                        if(Quantity>=5){
+                            JOptionPane.showMessageDialog(this, "A surprise gift will be waiting for you when you pick up your order 🎉🎁");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(this, "🎉 Congratulations! You have received a special offer on this order 🎁");
+                        }
                         x = new OrderDetails(name, Quantity);
                         y.makeOrder(x);
                         fName.setText("");

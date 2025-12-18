@@ -141,36 +141,44 @@ public class ManageAdminJFrame extends javax.swing.JFrame {
 
     private void Btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3ActionPerformed
         try {
-            int id = Integer.parseInt(txtID.getText());
+            //int id = Integer.parseInt(txtID.getText());
+            String id = txtID.getText();
             String name = txtName.getText();
             String pass = txtPass.getText();
-            if (name.isEmpty() || pass.isEmpty() || (id + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Empty field!");
+            if (!id.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
+            }
+            if (!name.matches("^[a-zA-Z][a-zA-Z0-9]*$")) {
+                throw new IllegalArgumentException("Name must be contain only letters and numbers");
+            }
+            if (name.isEmpty() || pass.isEmpty() || id.isEmpty() || name.matches(".*\\d.*")) {
+                JOptionPane.showMessageDialog(this, "Please, fill all fields and enter valied information", "Error", JOptionPane.ERROR_MESSAGE);
             }
             int flag = JOptionPane.showConfirmDialog(this, "Do you want to update this admin ?", "Confirme delete", JOptionPane.YES_NO_OPTION);
             if (flag == JOptionPane.YES_OPTION) {
-                if (admin.updateAdminInfo(id, name, pass)) {
+                if (admin.updateAdminInfo(Integer.parseInt(id), name, pass)) {
                     JOptionPane.showMessageDialog(this, "admin updated successfully");
                 } else {
                     JOptionPane.showMessageDialog(this, "admin not found!");
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_Btn3ActionPerformed
 
     private void Btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4ActionPerformed
         try {
-            int id = Integer.parseInt(txtID.getText());
-            if ((id + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please enter emloyee ID", "Error", JOptionPane.ERROR_MESSAGE);
+            String id = txtID.getText();
+//            int id = Integer.parseInt(txtID.getText());
+            if (!id.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
             } else {
-                String returnedEmp = admin.searchAdmin(id);
+                String returnedEmp = admin.searchAdmin(Integer.parseInt(id));
                 JOptionPane.showMessageDialog(this, returnedEmp);
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_Btn4ActionPerformed
 
@@ -193,43 +201,48 @@ public class ManageAdminJFrame extends javax.swing.JFrame {
 
     private void Btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1ActionPerformed
         try {
-            int id = Integer.parseInt(txtID.getText());
+            String id = txtID.getText();
+//            int id = Integer.parseInt(txtID.getText());
             String name = txtName.getText();
             String pass = txtPass.getText();
+            if (!id.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
+            }
+            if (!name.matches("^[a-zA-Z][a-zA-Z0-9]*$")) {
+                throw new IllegalArgumentException("Username must be contain only letters and numbers");
+            }
 
             if (name.isEmpty() || pass.isEmpty() || (id + "").isEmpty() || name.matches(".*\\d.*")) {
                 JOptionPane.showMessageDialog(this, "Please, fill all fields and enter valied information", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                admin.addAdmin(id, name, pass);
+                admin.addAdmin(Integer.parseInt(id), name, pass);
                 JOptionPane.showMessageDialog(this, "admin added successfully");
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_Btn1ActionPerformed
 
     private void Btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2ActionPerformed
         try {
-            int id = Integer.parseInt(txtID.getText());
-
-            if ((id + "").isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please, enter admin ID");
+//            int id = Integer.parseInt(txtID.getText());
+            String id = txtID.getText();
+            if (!id.matches("\\d+")) {
+                throw new IllegalArgumentException("ID must be contain only numbers");
             }
             int flag = JOptionPane.showConfirmDialog(this, "Do you want to delete this admin ?", "Confirme delete", JOptionPane.YES_NO_OPTION);
             if (flag == JOptionPane.YES_OPTION) {
 
-                boolean deleted = admin.deleteAdmin(id);
+                boolean deleted = admin.deleteAdmin(Integer.parseInt(id));
                 if (deleted) {
                     JOptionPane.showMessageDialog(this, "admin deleted successfully");
                 } else {
                     JOptionPane.showMessageDialog(this, "admin not found!");
                 }
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_Btn2ActionPerformed
 
