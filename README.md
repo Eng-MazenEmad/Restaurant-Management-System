@@ -54,19 +54,19 @@ You can use the following default credentials to test different roles right away
 
 | Login Interface | Role Selection |
 | :---: | :---: |
-| ![Login Screen](images/Screenshot_2026-09-15_125332.png) | ![Role Selector](images/Screenshot_2026-09-15_125755.png) |
+| ![Login Interface](images/Login%20Interface.png) | ![Role Selection](images/Role%20Selection.png) |
 
 | Admin Dashboard | Employee Hub |
 | :---: | :---: |
-| ![Admin Dashboard](images/Screenshot_2026-09-15_125405.png) | ![Employee App](images/Screenshot_2026-09-15_125523.png) |
+| ![Admin Dashboard](images/Admin%20Dashboard.png) | ![Employee Hub](images/Employee%20Hub.png) |
 
 | Meal Management | Order System |
 | :---: | :---: |
-| ![Meal Management](images/Screenshot_2026-09-15_125420.png) | ![Order System](images/Screenshot_2026-09-15_125637.png) |
+| ![Meal Management](images/Meal%20Management.png) | ![Order System](images/Order%20System.png) |
 
 | Customer Manager | Payment System |
 | :---: | :---: |
-| ![Customer Manager](images/Screenshot_2026-09-15_125826.png) | ![Payment System](images/Screenshot_2026-09-15_125755.png) |
+| ![Customer Manager](images/Customer%20Manager.png) | ![Payment System](images/Payment%20System.png) |
 
 ---
 
